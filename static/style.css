@@ -1,0 +1,108 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: url("bg4.jpg") ;
+    background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* changed to 100vh to ensure it covers the whole screen vertically */
+  min-height: 100vh; 
+  margin: 0;
+}
+label {
+  font-weight: bold;
+ font-style:#010305;
+}
+form {
+  background-color:transparent;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(145, 31, 31, 0.1);
+  width: 90%;
+  max-width: 300px;
+   
+  /* The animation properties are applied here */
+  opacity: 0;
+  transform: translateY(-20px); /* Start slightly above its final position */
+  animation: fadeInDown 0.8s ease-out 0.3s forwards;
+}
+
+/* Changed .h2 to target the div acting as a title */
+.h2 {
+  color: #010305;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.9em;
+  font-weight: 600;
+}
+
+/* Changed .h1 to target the div wrapping the label/input pair */
+.h1 input {
+  width: 100%;
+  padding: 10px 15px; /* Reduced padding slightly for better fit in the form */
+  margin-bottom: 15px;
+  border: 2px solid #9f6c6c;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 1em;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.h1 label {
+    display: block; /* Makes labels sit above inputs */
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.h1 input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.h1 input::placeholder {
+  color: #b11f1f;
+}
+
+.button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* Keyframes for the animation */
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        /* Moves the form from slightly above its position to its final position */
+        transform: translateY(0); 
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}

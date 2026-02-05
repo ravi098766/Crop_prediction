@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Prediction</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+ 
+<style>
+  
+</style>
+
+<body>
+    <form action="/predict" method="post">
+      
+ <div class="h2">Predict the Best Crop</div>
+
+        <div class="h1">
+            <label for="N">Nitrogen (N):</label>
+            <input type="text" id="N" name="N" placeholder="Enter N value">
+        </div>
+        
+        <div class="h1">
+            <label for="P">Phosphorus (P):</label>
+            <input type="text" id="P" name="P" placeholder="Enter P value">
+        </div>
+        
+        <div class="h1">
+            <label for="K">Potassium (K):</label>
+            <input type="text" id="K" name="K" placeholder="Enter K value">
+        </div>
+
+        <div class="h1">
+            <label for="temp">Temperature (°C):</label>
+            <input type="text" id="temp" name="temp" placeholder="Enter Temperature">
+        </div>
+
+        <div class="h1">
+            <label for="humid">Humidity (%):</label>
+            <input type="text" id="humid" name="humid" placeholder="Enter Humidity">
+        </div>
+
+        <div class="h1">
+            <label for="ph">pH Value:</label>
+            <input type="text" id="ph" name="ph" placeholder="Enter pH value">
+        </div>
+
+        <div class="h1">
+            <label for="rain">Rainfall (mm):</label>
+            <input type="text" id="rain" name="rain" placeholder="Enter Rainfall">
+        </div>
+        
+        <button type="submit" class="button">Predict</button>
+    </form>
+</body>
+</html>
