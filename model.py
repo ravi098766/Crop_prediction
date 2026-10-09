@@ -1,24 +1,37 @@
-
-
-from flask import Flask, render_template, request
+"""
+Crop Recommendation Model Helper Module
+Provides clean interface for loading crop recommendation model and running predictions.
+"""
 import pickle
+import pandas as pd
 
-app = Flask(__name__)
-model = pickle.load(open('crop_model.pkl', 'rb'))
+MODEL_PATH = 'crop_model.pkl'
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+def load_model():
+    with open(MODEL_PATH, 'rb') as f:
+        return pickle.load(f)
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    data = [float(x) for x in request.form.values()]
-    prediction = model.predict([data])
-    return render_template('result.html', crop=prediction[0])
+def predict_crop(N, P, K, temp, humid, ph, rain):
+    """
+    Predicts the optimal crop given soil & climate metrics.
+    Inputs:
+        N: Nitrogen ratio in soil (kg/ha)
+        P: Phosphorous ratio in soil (kg/ha)
+        K: Potassium ratio in soil (kg/ha)
+        temp: Temperature in degree Celsius
+        humid: Relative humidity in %
+        ph: pH value of soil (0-14)
+        rain: Rainfall in mm
+    Returns:
+        Predicted crop label string
+    """
+    model = load_model()
+    features_df = pd.DataFrame([[N, P, K, temp, humid, ph, rain]], 
+                               columns=['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall'])
+    prediction = model.predict(features_df)
+    return prediction[0]
 
 if __name__ == '__main__':
-    print("✅ Flask app is running at http://127.0.0.1:5000/")
-    app.run(debug=True)
-
-
-  
+    # Simple test run
+    sample_crop = predict_crop(90, 42, 43, 20.8, 82.0, 6.5, 202.9)
+    print(f"Sample Prediction Test: {sample_crop} (Expected: rice)")

@@ -1,31 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Prediction Result</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 50px;
-    }
-    h2 {
-      color: green;
-    }
-    p {
-      font-size: 24px;
-      font-weight: bold;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      text-decoration: none;
-      color: blue;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - Smart Crop Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        h2 {
+            color: #1b4332;
+            margin: 0 0 10px 0;
+            font-size: 24px;
+        }
+        .crop-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d6a4f;
+            margin: 15px 0;
+            text-transform: capitalize;
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px dashed #52b788;
+        }
+        .badge {
+            display: inline-block;
+            background: #1b4332;
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2d6a4f;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+            margin: 20px 0;
+        }
+        .error-box {
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        .btn-back {
+            display: inline-block;
+            background: #2d6a4f;
+            color: white;
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .btn-back:hover {
+            background: #1b4332;
+        }
+    </style>
 </head>
 <body>
-  <h2>Recommended Crop:</h2>
-  <p>{{ crop }}</p>
-  <a href="/">Try Again</a>
+    <div class="card">
+        {% if error %}
+            <div class="icon">⚠️</div>
+            <h2>Input Validation Alert</h2>
+            <div class="error-box">
+                {{ error }}
+            </div>
+        {% else %}
+            <div class="icon">🌾</div>
+            <h2>Recommended Crop</h2>
+            
+            <div class="crop-name">
+                {{ crop }}
+            </div>
+
+            {% if confidence %}
+                <div class="badge">
+                    Model Confidence: {{ confidence }}%
+                </div>
+            {% endif %}
+
+            {% if info %}
+                <div class="info-box">
+                    <strong>💡 Agronomic Advisory:</strong><br>
+                    {{ info }}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <a href="/" class="btn-back">🔄 Make Another Prediction</a>
+    </div>
 </body>
 </html>

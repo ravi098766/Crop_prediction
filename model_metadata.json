@@ -1,0 +1,108 @@
+{
+    "best_model": "Random Forest",
+    "accuracy": 0.9954545454545455,
+    "model_comparison": {
+        "Random Forest": {
+            "Test Accuracy": 99.55,
+            "CV Accuracy Mean": 99.45,
+            "CV Accuracy Std": 0.34
+        },
+        "Decision Tree": {
+            "Test Accuracy": 97.95,
+            "CV Accuracy Mean": 98.68,
+            "CV Accuracy Std": 0.33
+        },
+        "Gaussian Naive Bayes": {
+            "Test Accuracy": 99.55,
+            "CV Accuracy Mean": 99.5,
+            "CV Accuracy Std": 0.22
+        },
+        "Support Vector Machine (SVM)": {
+            "Test Accuracy": 98.41,
+            "CV Accuracy Mean": 97.82,
+            "CV Accuracy Std": 0.4
+        },
+        "K-Nearest Neighbors (KNN)": {
+            "Test Accuracy": 97.73,
+            "CV Accuracy Mean": 97.95,
+            "CV Accuracy Std": 0.14
+        }
+    },
+    "feature_names": [
+        "N",
+        "P",
+        "K",
+        "temperature",
+        "humidity",
+        "ph",
+        "rainfall"
+    ],
+    "crop_classes": [
+        "apple",
+        "banana",
+        "blackgram",
+        "chickpea",
+        "coconut",
+        "coffee",
+        "cotton",
+        "grapes",
+        "jute",
+        "kidneybeans",
+        "lentil",
+        "maize",
+        "mango",
+        "mothbeans",
+        "mungbean",
+        "muskmelon",
+        "orange",
+        "papaya",
+        "pigeonpeas",
+        "pomegranate",
+        "rice",
+        "watermelon"
+    ],
+    "feature_bounds": {
+        "N": {
+            "min": 0.0,
+            "max": 140.0,
+            "mean": 50.551818181818184,
+            "std": 36.9173338337566
+        },
+        "P": {
+            "min": 5.0,
+            "max": 145.0,
+            "mean": 53.36272727272727,
+            "std": 32.98588273858715
+        },
+        "K": {
+            "min": 5.0,
+            "max": 205.0,
+            "mean": 48.14909090909091,
+            "std": 50.64793054666013
+        },
+        "temperature": {
+            "min": 8.825674745,
+            "max": 43.67549305,
+            "mean": 25.616243851779544,
+            "std": 5.063748599958843
+        },
+        "humidity": {
+            "min": 14.25803981,
+            "max": 99.98187601,
+            "mean": 71.48177921778637,
+            "std": 22.263811589761083
+        },
+        "ph": {
+            "min": 3.504752314,
+            "max": 9.93509073,
+            "mean": 6.469480065256364,
+            "std": 0.7739376880298733
+        },
+        "rainfall": {
+            "min": 20.21126747,
+            "max": 298.5601175,
+            "mean": 103.46365541576817,
+            "std": 54.95838852487813
+        }
+    }
+}

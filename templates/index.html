@@ -1,55 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Crop Prediction</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Crop Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 35px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 650px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h2 {
+            color: #1b4332;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            font-size: 26px;
+        }
+        .header p {
+            color: #52b788;
+            font-size: 14px;
+            margin: 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .full-width {
+            grid-column: span 2;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d6a4f;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            padding: 10px 14px;
+            border: 2px solid #b7e4c7;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #2d6a4f;
+            box-shadow: 0 0 8px rgba(45, 106, 79, 0.3);
+        }
+        .hint {
+            font-size: 11px;
+            color: #74c69d;
+            margin-top: 3px;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 15px;
+            width: 100%;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.3);
+        }
+        @media (max-width: 550px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            .full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
 </head>
- 
-<style>
-  
-</style>
-
 <body>
-    <form action="/predict" method="post">
-      
- <div class="h2">Predict the Best Crop</div>
-
-        <div class="h1">
-            <label for="N">Nitrogen (N):</label>
-            <input type="text" id="N" name="N" placeholder="Enter N value">
-        </div>
-        
-        <div class="h1">
-            <label for="P">Phosphorus (P):</label>
-            <input type="text" id="P" name="P" placeholder="Enter P value">
-        </div>
-        
-        <div class="h1">
-            <label for="K">Potassium (K):</label>
-            <input type="text" id="K" name="K" placeholder="Enter K value">
+    <div class="container">
+        <div class="header">
+            <h2>🌱 Smart Crop Prediction</h2>
+            <p>Enter Soil Parameters & Meteorological Data for Machine Learning Recommendation</p>
         </div>
 
-        <div class="h1">
-            <label for="temp">Temperature (°C):</label>
-            <input type="text" id="temp" name="temp" placeholder="Enter Temperature">
-        </div>
+        <form action="/predict" method="post">
+            <div class="grid-container">
+                <div class="form-group">
+                    <label for="N">Nitrogen (N) [kg/ha]:</label>
+                    <input type="number" step="any" id="N" name="N" placeholder="e.g. 90 (0 - 140)" required>
+                    <span class="hint">Soil Nitrogen Content</span>
+                </div>
 
-        <div class="h1">
-            <label for="humid">Humidity (%):</label>
-            <input type="text" id="humid" name="humid" placeholder="Enter Humidity">
-        </div>
+                <div class="form-group">
+                    <label for="P">Phosphorus (P) [kg/ha]:</label>
+                    <input type="number" step="any" id="P" name="P" placeholder="e.g. 42 (5 - 145)" required>
+                    <span class="hint">Soil Phosphorus Content</span>
+                </div>
 
-        <div class="h1">
-            <label for="ph">pH Value:</label>
-            <input type="text" id="ph" name="ph" placeholder="Enter pH value">
-        </div>
+                <div class="form-group">
+                    <label for="K">Potassium (K) [kg/ha]:</label>
+                    <input type="number" step="any" id="K" name="K" placeholder="e.g. 43 (5 - 205)" required>
+                    <span class="hint">Soil Potassium Content</span>
+                </div>
 
-        <div class="h1">
-            <label for="rain">Rainfall (mm):</label>
-            <input type="text" id="rain" name="rain" placeholder="Enter Rainfall">
-        </div>
-        
-        <button type="submit" class="button">Predict</button>
-    </form>
+                <div class="form-group">
+                    <label for="temp">Temperature (°C):</label>
+                    <input type="number" step="any" id="temp" name="temp" placeholder="e.g. 20.8 (8.8 - 43.7)" required>
+                    <span class="hint">Ambient Temperature</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="humid">Humidity (%):</label>
+                    <input type="number" step="any" id="humid" name="humid" placeholder="e.g. 82.0 (14.2 - 99.9)" required>
+                    <span class="hint">Relative Humidity</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="ph">pH Value (0 - 14):</label>
+                    <input type="number" step="any" id="ph" name="ph" placeholder="e.g. 6.5 (3.5 - 9.9)" required>
+                    <span class="hint">Soil Acidity / Alkalinity</span>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="rain">Rainfall (mm):</label>
+                    <input type="number" step="any" id="rain" name="rain" placeholder="e.g. 202.9 (20 - 298)" required>
+                    <span class="hint">Annual Rainfall</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">🚀 Predict Best Crop</button>
+        </form>
+    </div>
 </body>
 </html>
